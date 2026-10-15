@@ -1,0 +1,9 @@
+{
+  "@legal/jurisdictions": "^1.0.0",
+  "@legal/acts": "^1.0.0",
+  "@legal/obligations": "^1.0.0",
+  "@legal/processes": "^1.0.0",
+  "@tax/core": "^1.0.0",
+  "@tax/indirect": "^1.0.0",
+  "@tax/filing": "^1.0.0"
+}

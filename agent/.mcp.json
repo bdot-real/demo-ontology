@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "onto": {
+      "type": "http",
+      "url": "${ONTO_REGISTRY:-https://onto.melx.buzz}/mcp"
+    },
+    "onto-tools": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["onto-tools.mjs"],
+      "env": { "ONTO_REGISTRY": "${ONTO_REGISTRY:-https://onto.melx.buzz}" }
+    }
+  }
+}

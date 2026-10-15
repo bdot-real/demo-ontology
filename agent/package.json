@@ -1,0 +1,12 @@
+{
+  "name": "maplewood-compliance-agent",
+  "private": true,
+  "type": "module",
+  "description": "Generic bridge that serves onto per-version MCP tool manifests as live MCP tools.",
+  "scripts": { "tools": "node onto-tools.mjs" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1"
+  }
+}

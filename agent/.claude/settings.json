@@ -1,0 +1,11 @@
+{
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": ["mcp__onto__*", "mcp__onto-tools__*", "Read(../seed/**)"],
+    "deny": [
+      "Bash", "WebFetch", "WebSearch", "Edit", "Write", "NotebookEdit",
+      "Read(**/*.ttl)", "Read(**/*.owl)", "Read(**/*.rdf)", "Read(**/*.nt)", "Read(**/*.trig)", "Read(**/*.rq)", "Read(**/*.sparql)",
+      "Read(../.env)", "Read(../../ontology/**)"
+    ]
+  }
+}

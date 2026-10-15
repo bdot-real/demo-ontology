@@ -6,3 +6,4 @@ node_modules/
 .DS_Store
 # internal planning doc, not for the public repo
 docs/project_brief.md
+agent/node_modules/
