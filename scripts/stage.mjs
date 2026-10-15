@@ -6,8 +6,8 @@
 //   node scripts/stage.mjs                 # start fresh staging on :3299, mirror prod, stay in foreground
 //   node scripts/stage.mjs --publish DIR   # publish a scripted draft to the running staging registry
 //
-// Env: ONTO_WEB (path to the registry's web/ dir, default ../ontology/web, already built with
-// `npm run build`), STAGE_PORT (3299), ONTO_PROD (https://onto.melx.buzz).
+// Env: ONTO_WEB (registry web/ dir, default .staging/registry/web, built by scripts/stage-setup.sh at
+// the commit production runs), STAGE_PORT (3299), ONTO_PROD (https://onto.melx.buzz).
 
 import { spawn } from "node:child_process";
 import fs from "node:fs";
@@ -16,7 +16,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const WEB = path.resolve(process.env.ONTO_WEB ?? path.join(here, "../../ontology/web"));
+const WEB = path.resolve(process.env.ONTO_WEB ?? path.join(here, "../.staging/registry/web"));
 const PORT = process.env.STAGE_PORT ?? "3299";
 const STAGE = `http://127.0.0.1:${PORT}`;
 const PROD = (process.env.ONTO_PROD ?? "https://onto.melx.buzz").replace(/\/$/, "");
@@ -89,7 +89,7 @@ async function mirror(token) {
 
 async function start() {
   const next = path.join(WEB, "node_modules/next/dist/bin/next");
-  if (!fs.existsSync(path.join(WEB, ".next/BUILD_ID"))) throw new Error(`no registry build in ${WEB}; run npm run build there`);
+  if (!fs.existsSync(path.join(WEB, ".next/BUILD_ID"))) throw new Error(`no registry build in ${WEB}; run scripts/stage-setup.sh`);
   const data = fs.mkdtempSync(path.join(os.tmpdir(), "onto-stage-"));
   const server = spawn(process.execPath, [next, "start", "-p", PORT], {
     cwd: WEB,
