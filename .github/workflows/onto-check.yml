@@ -1,0 +1,57 @@
+name: onto semantic diff
+
+# Beat 5: every PR that touches an ontology package is dry-run against the registry's version gate.
+# The semantic diff is posted as a PR comment, and the check fails when the declared bump is too small.
+
+on:
+  pull_request:
+    paths: ["packages/**"]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      ONTO_REGISTRY: ${{ vars.ONTO_REGISTRY || 'https://onto.melx.buzz' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Packages changed in this PR
+        id: pkgs
+        run: |
+          dirs=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- packages \
+            | cut -d/ -f1-2 | sort -u | while read d; do [ -f "$d/onto.yaml" ] && echo "$d"; done | tr '\n' ' ')
+          echo "dirs=$dirs" >> "$GITHUB_OUTPUT"
+      - name: Semantic diff and version gate
+        id: check
+        if: steps.pkgs.outputs.dirs != ''
+        run: |
+          set +e
+          node scripts/onto-check.mjs ${{ steps.pkgs.outputs.dirs }} > comment.md
+          code=$?
+          cat comment.md >> "$GITHUB_STEP_SUMMARY"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+      - name: Post or update the PR comment
+        if: steps.pkgs.outputs.dirs != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          id=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.number }}/comments" \
+            --jq '[.[] | select(.body | startswith("<!-- onto-check -->"))][0].id // empty')
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@comment.md >/dev/null
+          else
+            gh pr comment ${{ github.event.number }} --body-file comment.md
+          fi
+      - name: Gate
+        if: steps.check.outputs.code != '' && steps.check.outputs.code != '0'
+        run: |
+          echo "::error::The registry rejected this version. See the semantic diff in the PR comment."
+          exit 1
