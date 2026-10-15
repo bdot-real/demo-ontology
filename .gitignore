@@ -1,0 +1,8 @@
+.env
+.env.*
+node_modules/
+.staging/
+*.log
+.DS_Store
+# internal planning doc, not for the public repo
+docs/project_brief.md
