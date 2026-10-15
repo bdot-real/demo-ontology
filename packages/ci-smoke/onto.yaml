@@ -1,0 +1,5 @@
+name: "@sports/disciplines"
+version: 1.2.0
+description: SKOS taxonomy of sports and disciplines, for tagging athletes, events and content.
+license: CC-BY-4.0
+keywords: [sports, taxonomy, skos, disciplines]

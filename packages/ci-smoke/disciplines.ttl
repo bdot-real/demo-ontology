@@ -1,0 +1,28 @@
+@prefix :     <https://w3id.org/sports/disciplines/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+:scheme a skos:ConceptScheme ;
+  skos:prefLabel "Sports disciplines"@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  skos:hasTopConcept :team-sports , :individual-sports .
+
+:team-sports a skos:Concept ; skos:prefLabel "Team sports"@en ; skos:topConceptOf :scheme .
+:individual-sports a skos:Concept ; skos:prefLabel "Individual sports"@en ; skos:topConceptOf :scheme .
+
+:football a skos:Concept ; skos:prefLabel "Football"@en ; skos:altLabel "Soccer"@en ;
+  skos:broader :team-sports ; skos:inScheme :scheme .
+:rugby a skos:Concept ; skos:prefLabel "Rugby"@en ; skos:broader :team-sports ; skos:inScheme :scheme .
+:rugby-union a skos:Concept ; skos:prefLabel "Rugby union"@en ; skos:broader :rugby ; skos:inScheme :scheme ;
+  skos:definition "Fifteen-a-side rugby governed by World Rugby."@en .
+:rugby-sevens a skos:Concept ; skos:prefLabel "Rugby sevens"@en ; skos:broader :rugby ; skos:inScheme :scheme .
+:rugby-league a skos:Concept ; skos:prefLabel "Rugby league"@en ; skos:broader :rugby ; skos:inScheme :scheme .
+:cricket a skos:Concept ; skos:prefLabel "Cricket"@en ; skos:broader :team-sports ; skos:inScheme :scheme .
+:basketball a skos:Concept ; skos:prefLabel "Basketball"@en ; skos:broader :team-sports ; skos:inScheme :scheme .
+
+:athletics a skos:Concept ; skos:prefLabel "Athletics"@en ; skos:altLabel "Track and field"@en ;
+  skos:broader :individual-sports ; skos:inScheme :scheme .
+:sprint a skos:Concept ; skos:prefLabel "Sprint"@en ; skos:broader :athletics ; skos:inScheme :scheme .
+:marathon a skos:Concept ; skos:prefLabel "Marathon"@en ; skos:broader :athletics ; skos:inScheme :scheme .
+:tennis a skos:Concept ; skos:prefLabel "Tennis"@en ; skos:broader :individual-sports ; skos:inScheme :scheme .
+:swimming a skos:Concept ; skos:prefLabel "Swimming"@en ; skos:broader :individual-sports ; skos:inScheme :scheme .
