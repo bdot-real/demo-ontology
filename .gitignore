@@ -7,3 +7,4 @@ node_modules/
 # internal planning doc, not for the public repo
 docs/project_brief.md
 agent/node_modules/
+.recording/

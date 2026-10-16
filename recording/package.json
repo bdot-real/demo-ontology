@@ -1,0 +1,10 @@
+{
+  "name": "maplewood-recording",
+  "private": true,
+  "type": "module",
+  "description": "Capture, render and edit the 3-minute cut (#17)",
+  "dependencies": {
+    "@xterm/addon-serialize": "^0.13.0",
+    "@xterm/headless": "5.5.0"
+  }
+}
