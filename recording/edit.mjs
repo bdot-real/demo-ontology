@@ -193,7 +193,7 @@ s = await put("b5-pr", 0, 18);
 await caption("A pull request labels a breaking schema change as a minor version (1.1.0)", s.start, 6);
 await caption("CI posts the registry's semantic diff: two breaking changes, so it needs 2.0.0", s.start + 6, s.len - 6);
 s = await put("b5-job", 0, 99);
-await caption("The Gate step fails, so the PR can't merge", s.start, s.len);
+await caption("The Gate step fails: the check is red, and the PR comment says why", s.start, s.len);
 s = await put("b5-publish", 0, 99);
 await enlarge(s.clip);
 await caption("The registry enforces the same rule on publish: rejected", s.start, s.len);
@@ -203,7 +203,7 @@ await title("5 · The model changes", b, at - b);
 b = at;
 s = await put("b6-publish", 0, 99);
 await enlarge(s.clip);
-await caption("The schema change ships properly, as @tax/indirect 2.0.0", s.start, s.len);
+await caption("The schema change ships properly, as @tax/indirect 2.0.0 (on staging)", s.start, s.len);
 s = await put("b6-diff", 0, 99);
 await caption("placeOfSupply becomes required; claimedOn is deprecated for creditedSupply", s.start, s.len);
 last = await agentShot("b6-agent", [
