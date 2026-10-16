@@ -8,7 +8,7 @@
 <https://onto.melx.buzz/ns/tax/core> a owl:Ontology ;
     rdfs:label "Tax Core" ;
     rdfs:comment "Core tax concepts for modeling tax rates, authorities, and types." ;
-    owl:versionInfo "3.0.0" .
+    owl:versionInfo "3.1.0" .
 
 
 :TaxType a skos:ConceptScheme ;
@@ -179,6 +179,15 @@
     :sourceUrl "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^xsd:anyURI ;
     :verifiedOn "2026-10-16"^^xsd:date ;
     rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-QST-QC-2027 a :TaxRate ;
+    rdfs:label "QST rate from 2027 (hypothetical)" ;
+    :rate "0.10"^^xsd:decimal ;
+    :effectiveFrom "2027-01-01"^^xsd:date ;
+    :taxType :QST ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
+    rdfs:comment "Hypothetical rate change for demonstration, not tax advice. Not a real QST rate." .
 
 :rate-PST-BC a :TaxRate ;
     :rate "0.07"^^xsd:decimal ;
