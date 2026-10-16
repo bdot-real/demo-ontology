@@ -207,9 +207,7 @@
     <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
     <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
     <https://onto.melx.buzz/ns/tax/core#rate> "0.10"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
-    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
-    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#QST> ;
-    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#QST> .
 
 <https://onto.melx.buzz/ns/tax/core#rate-ST-NY>
     <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;

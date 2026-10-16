@@ -1,6 +1,6 @@
 # Scripted demo versions (staging only, decision D3)
 
-Copied unchanged from the ontology repo's `drafts/demo/` at d5a42a6. **Never publish these to production.** `scripts/beats.sh` publishes them to the staging registry in this order:
+Copied unchanged from the ontology repo's `drafts/demo/` at 00c3e20. **Never publish these to production.** `scripts/beats.sh` publishes them to the staging registry in this order:
 
 | Step | Draft | Expected | Beat |
 | --- | --- | --- | --- |

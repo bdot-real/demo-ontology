@@ -187,8 +187,6 @@
     :taxType :QST ;
     :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
     :imposedBy <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
-    :sourceUrl "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^xsd:anyURI ;
-    :verifiedOn "2026-10-16"^^xsd:date ;
     rdfs:comment "Hypothetical rate change for demonstration, not tax advice. Not a real QST rate." .
 
 :rate-PST-BC a :TaxRate ;
