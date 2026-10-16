@@ -6,6 +6,6 @@ keywords: ["tax"]
 namespace: https://onto.melx.buzz/ns/tax/indirect#
 sources: [ontology/*.ttl]
 dependencies:
-  "@tax/core": "^1"
+  "@tax/core": "^3"
   "@legal/jurisdictions": "^1"
   "@w3c/org": "^1"
