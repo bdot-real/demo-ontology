@@ -11,7 +11,7 @@
 <https://onto.melx.buzz/ns/tax/indirect> a owl:Ontology ;
     rdfs:label "Tax Indirect" ;
     rdfs:comment "Ontology for indirect tax concepts including supplies, thresholds, and tax credits." ;
-    owl:versionInfo "1.0.0" .
+    owl:versionInfo "1.0.1" .
 
 :Supply a owl:Class ;
     rdfs:label "Supply" ;
