@@ -1,0 +1,7 @@
+@prefix : <https://onto.melx.buzz/ns/tax/core#> .
+@prefix d: <https://onto.melx.buzz/ns/tax/core/data/> .
+
+d:ExampleExemption a :Exemption .
+d:ExampleZeroRating a :ZeroRating .
+d:ExampleRegistrant a :Registrant .
+d:ExampleRegistrationNumber a :RegistrationNumber .

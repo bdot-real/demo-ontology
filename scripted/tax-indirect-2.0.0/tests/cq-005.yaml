@@ -1,0 +1,16 @@
+id: CQ-005
+question: "What is the source URL for the threshold in Quebec?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?sourceUrl
+  WHERE {
+    ?threshold a :RegistrationThreshold ;
+        :thresholdJurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+        :sourceUrl ?sourceUrl .
+  }
+expect:
+  rows: 1
+  contains: [{"sourceUrl":"<https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec/qst-registration-for-suppliers-outside-quebec/registration-under-the-specified-system-suppliers-outside-quebec-who-are-registered-under-the-general-gsthst-system/>"}]

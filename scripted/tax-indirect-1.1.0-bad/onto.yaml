@@ -1,0 +1,11 @@
+name: "@tax/indirect"
+version: 1.1.0
+description: "Ontology for indirect tax concepts including supplies, thresholds, and tax credits."
+license: Apache-2.0
+keywords: ["tax"]
+namespace: https://onto.melx.buzz/ns/tax/indirect#
+sources: [ontology/*.ttl]
+dependencies:
+  "@tax/core": "^1"
+  "@legal/jurisdictions": "^1"
+  "@w3c/org": "^1"

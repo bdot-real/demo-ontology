@@ -1,0 +1,15 @@
+id: CQ-007
+question: "What are the rate values, source URLs, and verification dates for all tax rates?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?rateValue ?sourceUrl ?verifiedOn
+  WHERE {
+    ?rate a :TaxRate ;
+           :rate ?rateValue ;
+           :sourceUrl ?sourceUrl ;
+           :verifiedOn ?verifiedOn .
+  }
+expect:
+  rows: 7
+  contains: [{"rateValue":"<0.065>","sourceUrl":"<https://dor.wa.gov/taxes-rates/retail-sales-tax>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.04>","sourceUrl":"<https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/sales_tax_rates_additional_sales_taxes_and_fees.htm>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.07>","sourceUrl":"<https://www2.gov.bc.ca/gov/content/taxes/tim/pst/parts/pt-4>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.1>","sourceUrl":"<https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.09975>","sourceUrl":"<https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.13>","sourceUrl":"<https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html>","verifiedOn":"<2026-10-16>"},{"rateValue":"<0.05>","sourceUrl":"<https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html>","verifiedOn":"<2026-10-16>"}]

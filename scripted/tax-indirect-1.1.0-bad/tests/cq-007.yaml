@@ -1,0 +1,17 @@
+id: CQ-007
+question: "Which input tax credits are claimed on a taxable supply?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT DISTINCT ?credit
+  WHERE {
+    ?credit a :InputTaxCredit ;
+            :claimedOn ?supply .
+    ?supply a/rdfs:subClassOf* :TaxableSupply .
+  }
+expect:
+  rows: 1
+  contains: [{"credit":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodInputTaxCredit2>"}]

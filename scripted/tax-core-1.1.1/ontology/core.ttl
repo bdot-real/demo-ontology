@@ -1,0 +1,255 @@
+@prefix taxcore: <https://onto.melx.buzz/ns/tax/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://onto.melx.buzz/agents/onto-agent>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "onto agent" .
+
+<https://onto.melx.buzz/agents/onto-agent/runs/20261016042914>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "onto agent run with qwen3:30b-a3b" ;
+    <http://www.w3.org/ns/prov#startedAtTime> "2026-10-16T04:29:14.071Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://www.w3.org/ns/prov#wasAssociatedWith> <https://onto.melx.buzz/agents/onto-agent> .
+
+<https://onto.melx.buzz/ns/tax/core>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Core tax concepts for modeling tax rates, authorities, and types." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Tax Core" ;
+    <http://www.w3.org/2002/07/owl#versionInfo> "1.1.1" ;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <https://onto.melx.buzz/agents/onto-agent> ;
+    <http://www.w3.org/ns/prov#wasGeneratedBy> <https://onto.melx.buzz/agents/onto-agent/runs/20261016042914> .
+
+<https://onto.melx.buzz/ns/tax/core#BCMinistryOfFinance>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxAuthority> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The ministry responsible for tax collection in British Columbia." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "BC Ministry of Finance" .
+
+<https://onto.melx.buzz/ns/tax/core#CRA>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxAuthority> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Canada Revenue Agency, the federal tax authority for Canada." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "CRA" .
+
+<https://onto.melx.buzz/ns/tax/core#Exemption>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A condition under which a tax is not applied to a transaction or entity." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Exemption" .
+
+<https://onto.melx.buzz/ns/tax/core#GST>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Goods and Services Tax." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://onto.melx.buzz/ns/tax/core#TaxType> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "GST" .
+
+<https://onto.melx.buzz/ns/tax/core#HST>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Harmonized Sales Tax." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://onto.melx.buzz/ns/tax/core#TaxType> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "HST" .
+
+<https://onto.melx.buzz/ns/tax/core#NYDTF>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxAuthority> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "New York Department of Taxation and Finance." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "NY DTF" .
+
+<https://onto.melx.buzz/ns/tax/core#PST>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Provincial Sales Tax." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://onto.melx.buzz/ns/tax/core#TaxType> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "PST" .
+
+<https://onto.melx.buzz/ns/tax/core#QST>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Quebec Sales Tax." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://onto.melx.buzz/ns/tax/core#TaxType> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "QST" .
+
+<https://onto.melx.buzz/ns/tax/core#Registrant>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A legal entity that is registered with a tax authority." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Registrant" .
+
+<https://onto.melx.buzz/ns/tax/core#RegistrationNumber>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A unique identifier assigned to a registrant by a tax authority." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Registration Number" .
+
+<https://onto.melx.buzz/ns/tax/core#RevenuQuebec>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxAuthority> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The tax authority for Quebec provincial taxes." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Revenu Québec" .
+
+<https://onto.melx.buzz/ns/tax/core#TaxAuthority>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "An authority that administers tax collection and enforcement." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Tax Authority" .
+
+<https://onto.melx.buzz/ns/tax/core#TaxRate>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A tax rate with an effective period, applicable to a specific tax type and jurisdiction." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Tax Rate" ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#cardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#effectiveFrom>] ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#cardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#imposedBy>] ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#cardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#jurisdiction>] ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#cardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#rate>] ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#cardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#taxType>] ;
+    <http://www.w3.org/2000/01/rdf-schema#subClassOf> [<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> ; <http://www.w3.org/2002/07/owl#maxCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; <http://www.w3.org/2002/07/owl#onProperty> <https://onto.melx.buzz/ns/tax/core#effectiveTo>] .
+
+<https://onto.melx.buzz/ns/tax/core#TaxType>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "A scheme of tax types for which rates are defined." ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Tax Type" .
+
+<https://onto.melx.buzz/ns/tax/core#US_SalesTax>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "United States Sales Tax." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://onto.melx.buzz/ns/tax/core#TaxType> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "US-SalesTax" .
+
+<https://onto.melx.buzz/ns/tax/core#WADOR>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxAuthority> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Washington Department of Revenue." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "WA DOR" .
+
+<https://onto.melx.buzz/ns/tax/core#ZeroRating>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A tax rate of zero applied to a specific transaction or category." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Zero Rating" .
+
+<https://onto.melx.buzz/ns/tax/core#effectiveFrom>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The date from which the tax rate becomes effective." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Effective From" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#effectiveTo>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The date until which the tax rate is effective (if any)." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Effective To" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#imposedBy>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The legal provision that imposes the tax rate." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Imposed By" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <https://onto.melx.buzz/ns/legal/acts#Provision> .
+
+<https://onto.melx.buzz/ns/tax/core#jurisdiction>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The jurisdiction for which the tax rate applies." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Jurisdiction" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+
+<https://onto.melx.buzz/ns/tax/core#rate>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The tax rate as a decimal value (e.g., 0.05 for 5%)." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Rate" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-GST-CA>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2008-01-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.05"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#GST> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-HST-ON>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2010-07-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.13"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#HST> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-PST-BC>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2013-04-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#bc_provincial_sales_tax> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA-BC> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.07"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www2.gov.bc.ca/gov/content/taxes/tim/pst/parts/pt-4"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#PST> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-QST-QC>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2013-01-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.09975"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#QST> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-QST-QC-2027>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Hypothetical rate change for demonstration, not tax advice. Not a real QST rate." ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "QST rate from 2027 (hypothetical)" ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2027-01-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.10"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#QST> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-ST-NY>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "2005-06-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#ny_tax_law_section1105> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#US-NY> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.04"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/sales_tax_rates_additional_sales_taxes_and_fees.htm"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#US_SalesTax> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#rate-ST-WA>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "For demonstration, not tax advice. Verified 2026-10-16." ;
+    <https://onto.melx.buzz/ns/tax/core#effectiveFrom> "1983-07-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <https://onto.melx.buzz/ns/tax/core#imposedBy> <https://onto.melx.buzz/ns/legal/acts#wa_rcw_82_08_020> ;
+    <https://onto.melx.buzz/ns/tax/core#jurisdiction> <https://onto.melx.buzz/ns/legal/jurisdictions#US-WA> ;
+    <https://onto.melx.buzz/ns/tax/core#rate> "0.065"^^<http://www.w3.org/2001/XMLSchema#decimal> ;
+    <https://onto.melx.buzz/ns/tax/core#sourceUrl> "https://dor.wa.gov/taxes-rates/retail-sales-tax"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+    <https://onto.melx.buzz/ns/tax/core#taxType> <https://onto.melx.buzz/ns/tax/core#US_SalesTax> ;
+    <https://onto.melx.buzz/ns/tax/core#verifiedOn> "2026-10-16"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<https://onto.melx.buzz/ns/tax/core#sourceUrl>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The URL of the source from which the rate was verified." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Source URL" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#anyURI> .
+
+<https://onto.melx.buzz/ns/tax/core#taxType>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The tax type (e.g., GST, HST) for which the rate applies." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Tax Type" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+
+<https://onto.melx.buzz/ns/tax/core#verifiedOn>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> ;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "The date on which the rate was verified." ;
+    <http://www.w3.org/2000/01/rdf-schema#domain> <https://onto.melx.buzz/ns/tax/core#TaxRate> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Verified On" ;
+    <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .

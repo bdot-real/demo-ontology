@@ -1,0 +1,15 @@
+id: CQ-009
+question: "Which registration thresholds have a measurement period of \"12 months\"?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?threshold
+  WHERE {
+    ?threshold a :RegistrationThreshold ;
+        :measurementPeriod "12 months"^^xsd:string .
+  }
+expect:
+  rows: 1
+  contains: [{"threshold":"<https://onto.melx.buzz/ns/tax/indirect#threshold-specified-QST-QC>"}]
