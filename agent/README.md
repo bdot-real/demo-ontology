@@ -4,8 +4,8 @@ Claude Code, configured as Maplewood's indirect-tax agent.
 
 ```sh
 cd agent && npm install
-ONTO_REGISTRY=http://127.0.0.1:3299 claude     # staging (rehearsals and the live demo; see ../scripts/stage.mjs)
-claude                                         # production registry (read-only use)
+./run.sh                                        # staging (default; start it with ../scripts/stage.mjs)
+ONTO_REGISTRY=https://onto.melx.buzz ./run.sh   # production registry (read-only use)
 ```
 
 - `.mcp.json` connects two servers: the registry's own MCP endpoint (`onto`, for discovery across every package) and `onto-tools.mjs`.

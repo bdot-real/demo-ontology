@@ -1,11 +1,30 @@
 {
   "enableAllProjectMcpServers": true,
   "permissions": {
-    "allow": ["mcp__onto__*", "mcp__onto-tools__*", "Read(../seed/**)"],
+    "allow": [
+      "mcp__onto__*",
+      "mcp__onto-tools__*"
+    ],
     "deny": [
-      "Bash", "WebFetch", "WebSearch", "Edit", "Write", "NotebookEdit",
-      "Read(**/*.ttl)", "Read(**/*.owl)", "Read(**/*.rdf)", "Read(**/*.nt)", "Read(**/*.trig)", "Read(**/*.rq)", "Read(**/*.sparql)",
-      "Read(../.env)", "Read(../../ontology/**)"
+      "Bash",
+      "WebFetch",
+      "WebSearch",
+      "Edit",
+      "Write",
+      "NotebookEdit",
+      "Read(**/*.ttl)",
+      "Read(**/*.owl)",
+      "Read(**/*.rdf)",
+      "Read(**/*.nt)",
+      "Read(**/*.trig)",
+      "Read(**/*.rq)",
+      "Read(**/*.sparql)",
+      "Read(../.env)",
+      "Read(../../ontology/**)",
+      "Read(../docs/**)",
+      "Read(../scripts/**)",
+      "Read(~/.claude/**)"
     ]
-  }
+  },
+  "autoMemoryEnabled": false
 }

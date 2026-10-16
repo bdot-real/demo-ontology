@@ -16,7 +16,7 @@ const require = createRequire(path.join(root, "agent/package.json"));
 const { Client } = await import(require.resolve("@modelcontextprotocol/sdk/client/index.js"));
 const { StdioClientTransport } = await import(require.resolve("@modelcontextprotocol/sdk/client/stdio.js"));
 
-// Three deliberate bad rows across the two files (see seed/README.md).
+// Three deliberate bad rows across the two files (see docs/seed-data.md).
 const EXPECTED = {
   "october-2026.jsonl": { tool: "tax_indirect__validate_taxable_supply", valid: 198, invalid: 2 },
   "rates.jsonl": { tool: "tax_core__validate_tax_rate", valid: 6, invalid: 1 },

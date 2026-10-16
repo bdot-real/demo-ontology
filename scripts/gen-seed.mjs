@@ -5,7 +5,7 @@
 //   node scripts/gen-seed.mjs
 //
 // Shapes follow the published JSON Schemas: TaxableSupply (@tax/indirect 1.0.0) and TaxRate
-// (@tax/core 1.0.0). Conventions that the ontology leaves open, such as currency, are in seed/README.md.
+// (@tax/core 1.0.0). Conventions that the ontology leaves open, such as currency, are in docs/seed-data.md.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -97,7 +97,7 @@ fs.writeFileSync(path.join(SEED, "rates.jsonl"), rates.map((r) => JSON.stringify
 // Maplewood's company profile: registrations, filing periods and deadlines (FilingPeriod is from
 // @tax/filing, FilingDeadline from @legal/processes) and trailing sales for the threshold question.
 // Registration numbers are fictional. Due-date rules were verified on official pages on 2026-10-16
-// (see seed/README.md). Weekend roll-forwards are applied where the authority states the rule.
+// (see docs/seed-data.md). Weekend roll-forwards are applied where the authority states the rule.
 const FILING = "https://onto.melx.buzz/ns/tax/filing#";
 // Deadlines are pure FilingDeadline instances (closed-world); the rule and source for each go in
 // deadlineSources, keyed by @id, so the instances validate as they are.
