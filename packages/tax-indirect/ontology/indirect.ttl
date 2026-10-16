@@ -11,14 +11,14 @@
 <https://onto.melx.buzz/ns/tax/indirect> a owl:Ontology ;
     rdfs:label "Tax Indirect" ;
     rdfs:comment "Ontology for indirect tax concepts including supplies, thresholds, and tax credits." ;
-    owl:versionInfo "1.0.1" .
+    owl:versionInfo "1.1.0" .
 
 :Supply a owl:Class ;
     rdfs:label "Supply" ;
     rdfs:comment "A supply of goods or services, including digital goods." ;
     rdfs:subClassOf [ a owl:Restriction ;
         owl:onProperty :placeOfSupply ;
-        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
     rdfs:subClassOf [ a owl:Restriction ;
         owl:onProperty :amount ;
         owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -141,7 +141,7 @@
 
 :claimedOn a owl:ObjectProperty ;
     rdfs:domain :InputTaxCredit ;
-    rdfs:range :Supply ;
+    rdfs:range :TaxableSupply ;
     rdfs:label "claimed on" ;
     rdfs:comment "The supply on which the input tax credit is claimed." .
 
