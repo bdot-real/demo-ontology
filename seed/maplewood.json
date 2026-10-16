@@ -1,0 +1,193 @@
+{
+  "@id": "https://maplewood.example/",
+  "name": "Maplewood Software Inc. (fictional)",
+  "homeJurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON",
+  "registrations": [
+    {
+      "jurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#CA",
+      "taxTypes": [
+        "https://onto.melx.buzz/ns/tax/core#GST",
+        "https://onto.melx.buzz/ns/tax/core#HST"
+      ],
+      "authority": "https://onto.melx.buzz/ns/tax/core#CRA",
+      "number": "999999999RT0001",
+      "frequency": "monthly",
+      "since": "2019-03-01"
+    },
+    {
+      "jurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC",
+      "taxTypes": [
+        "https://onto.melx.buzz/ns/tax/core#QST"
+      ],
+      "authority": "https://onto.melx.buzz/ns/tax/core#RevenuQuebec",
+      "number": "NR00009999",
+      "system": "specified",
+      "frequency": "quarterly",
+      "since": "2021-07-01"
+    },
+    {
+      "jurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#CA-BC",
+      "taxTypes": [
+        "https://onto.melx.buzz/ns/tax/core#PST"
+      ],
+      "authority": "https://onto.melx.buzz/ns/tax/core#BCMinistryOfFinance",
+      "number": "PST-9999-9999",
+      "frequency": "monthly",
+      "since": "2021-04-01"
+    },
+    {
+      "jurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#US-NY",
+      "taxTypes": [
+        "https://onto.melx.buzz/ns/tax/core#US_SalesTax"
+      ],
+      "authority": "https://onto.melx.buzz/ns/tax/core#NYDTF",
+      "number": "99-9999999",
+      "frequency": "quarterly",
+      "since": "2022-12-01"
+    },
+    {
+      "jurisdiction": "https://onto.melx.buzz/ns/legal/jurisdictions#US-WA",
+      "taxTypes": [
+        "https://onto.melx.buzz/ns/tax/core#US_SalesTax"
+      ],
+      "authority": "https://onto.melx.buzz/ns/tax/core#WADOR",
+      "number": "999-999-999",
+      "frequency": "monthly",
+      "since": "2026-10-01"
+    }
+  ],
+  "periods": [
+    {
+      "@id": "https://maplewood.example/periods/CA-2026-10",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-31",
+      "frequency": [
+        "https://onto.melx.buzz/ns/tax/filing#monthly"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/periods/QC-2026-Q4",
+      "startDate": "2026-10-01",
+      "endDate": "2026-12-31",
+      "frequency": [
+        "https://onto.melx.buzz/ns/tax/filing#quarterly"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/periods/BC-2026-10",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-31",
+      "frequency": [
+        "https://onto.melx.buzz/ns/tax/filing#monthly"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/periods/NY-2026-SEP-NOV",
+      "startDate": "2026-09-01",
+      "endDate": "2026-11-30",
+      "frequency": [
+        "https://onto.melx.buzz/ns/tax/filing#quarterly"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/periods/WA-2026-10",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-31",
+      "frequency": [
+        "https://onto.melx.buzz/ns/tax/filing#monthly"
+      ]
+    }
+  ],
+  "deadlines": [
+    {
+      "@id": "https://maplewood.example/deadlines/GST-HST-2026-10",
+      "dueDate": "2026-11-30",
+      "hasJurisdiction": [
+        "https://onto.melx.buzz/ns/legal/jurisdictions#CA"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/deadlines/QST-2026-Q4",
+      "dueDate": "2027-01-31",
+      "hasJurisdiction": [
+        "https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/deadlines/PST-2026-10",
+      "dueDate": "2026-11-30",
+      "hasJurisdiction": [
+        "https://onto.melx.buzz/ns/legal/jurisdictions#CA-BC"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/deadlines/ST-NY-2026-SEP-NOV",
+      "dueDate": "2026-12-21",
+      "hasJurisdiction": [
+        "https://onto.melx.buzz/ns/legal/jurisdictions#US-NY"
+      ]
+    },
+    {
+      "@id": "https://maplewood.example/deadlines/ST-WA-2026-10",
+      "dueDate": "2026-11-25",
+      "hasJurisdiction": [
+        "https://onto.melx.buzz/ns/legal/jurisdictions#US-WA"
+      ]
+    }
+  ],
+  "deadlineSources": {
+    "https://maplewood.example/deadlines/GST-HST-2026-10": {
+      "rule": "Monthly filer: one month after the end of the reporting period",
+      "sourceUrl": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/file-gst-hst-return/reporting-requirements-deadlines.html",
+      "verifiedOn": "2026-10-16"
+    },
+    "https://maplewood.example/deadlines/QST-2026-Q4": {
+      "rule": "Specified system: last day of the month following the calendar quarter (2027-01-31 is a Sunday; confirm roll-forward, #14)",
+      "sourceUrl": "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec/reporting-the-qst/",
+      "verifiedOn": "2026-10-16"
+    },
+    "https://maplewood.example/deadlines/PST-2026-10": {
+      "rule": "Last day of the month after the end of the reporting period",
+      "sourceUrl": "https://www2.gov.bc.ca/gov/content/taxes/sales-taxes/pst/report-pay/pst-return-guide",
+      "verifiedOn": "2026-10-16"
+    },
+    "https://maplewood.example/deadlines/ST-NY-2026-SEP-NOV": {
+      "rule": "Quarterly: 20 days after the quarter (2026-12-20 is a Sunday, next business day)",
+      "sourceUrl": "https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/filing_requirements_for_sales_and_use_tax_returns.htm",
+      "verifiedOn": "2026-10-16"
+    },
+    "https://maplewood.example/deadlines/ST-WA-2026-10": {
+      "rule": "Monthly: the 25th of the following month",
+      "sourceUrl": "https://dor.wa.gov/file-pay-taxes/filing-frequencies-due-dates/2026-excise-tax-return-due-dates",
+      "verifiedOn": "2026-10-16"
+    }
+  },
+  "trailing12m": {
+    "CA-ON": {
+      "currency": "CAD",
+      "amount": 1840000,
+      "sales": 1012
+    },
+    "CA-QC": {
+      "currency": "CAD",
+      "amount": 512000,
+      "sales": 560,
+      "toConsumers": 61800
+    },
+    "CA-BC": {
+      "currency": "CAD",
+      "amount": 318000,
+      "sales": 371
+    },
+    "US-NY": {
+      "currency": "USD",
+      "amount": 604000,
+      "sales": 298
+    },
+    "US-WA": {
+      "currency": "USD",
+      "amount": 108400,
+      "sales": 233
+    }
+  }
+}
