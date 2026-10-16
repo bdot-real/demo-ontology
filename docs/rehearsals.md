@@ -16,3 +16,5 @@
 | 2026-10-16 | End-to-end run 2 (01da512) | ✔ 59/59 | |
 | 2026-10-16 | End-to-end run 3 (staging at a9ff36f, prod's dependency-range classifier) | 58/59 | Agent answer correct ("Today: No…"); the beat-6 check's wording pattern missed it. Pattern fixed |
 | 2026-10-16 | End-to-end run 4 (a9ff36f) | ✔ 59/59 | **But staging ≠ prod:** under a9ff36f the registry refuses to replay prod's `@tax/indirect` 1.0.1 and `@tax/filing` 1.0.1 ("patch … requires major"), so staging serves 1.0.0. Rehearse now fails when the mirror refuses any version. Raised with ontology-fd |
+| 2026-10-16 | **Counted pair, run 5** (staging at d181153, verified mirror: identical to prod) | ✔ 60/60 | Beats 1–3 and the beat-6 re-run: 7/7 lines, citations and labels; beat 4 and beat 6 answers correct; staging verdicts against `@tax/indirect` 1.0.1 match CI; tool audit clean |
+| 2026-10-16 | **Counted pair, run 6**, straight after run 5 | ✔ 60/60 | Same. Two consecutive clean end-to-end runs (#17) |
