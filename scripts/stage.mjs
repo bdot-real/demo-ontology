@@ -27,10 +27,14 @@ const ROOTS = process.env.STAGE_ROOTS?.split(",") ?? ["@tax/filing", "@tax/indir
 // Scripted demo versions: allowed on staging only.
 const SCRIPTED = new Set(["@tax/core@1.1.0", "@tax/core@1.1.1", "@tax/core@3.1.0", "@tax/core@3.1.1", "@tax/indirect@1.1.0", "@tax/indirect@2.0.0"]);
 
+// Retries: prod can briefly 404 or 5xx while it redeploys.
 async function get(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`${r.status} ${url}`);
-  return r;
+  for (let i = 0; ; i++) {
+    const r = await fetch(url).catch((e) => ({ ok: false, status: e.message }));
+    if (r.ok) return r;
+    if (i === 4) throw new Error(`${r.status} ${url}`);
+    await new Promise((res) => setTimeout(res, 1000 * 2 ** i));
+  }
 }
 
 async function api(method, url, body, token) {
@@ -80,8 +84,10 @@ async function mirror(token) {
         console.error(`  REFUSING: ${name}@${meta.version} is on production but is a scripted demo version (D3)`);
         continue;
       }
-      const r = await api("PUT", `/api/packages/${name}`, await payloadFor(meta), token);
-      console.log(`  ${r.ok ? "+" : "!"} ${name}@${meta.version}${r.ok ? "" : `  ${r.json.error ?? r.status}`}`);
+      // Verified mirror: staging stores prod's exact version (same dist.integrity) without re-gating it, so a
+      // version published under older classifier rules still replays. Scripted versions never use this.
+      const r = await api("PUT", `/api/packages/${name}`, { ...(await payloadFor(meta)), mirror: PROD }, token);
+      console.log(`  ${r.ok ? "+" : "!"} ${name}@${meta.version}${r.ok ? (r.json.mirroredFrom ? "" : "  (not mirrored)") : `  ${r.json.error ?? r.status}`}`);
     }
   };
   for (const root of ROOTS) await visit(root);
@@ -93,7 +99,7 @@ async function start() {
   const data = fs.mkdtempSync(path.join(os.tmpdir(), "onto-stage-"));
   const server = spawn(process.execPath, [next, "start", "-p", PORT], {
     cwd: WEB,
-    env: { ...process.env, ONTO_DATA_DIR: data },
+    env: { ...process.env, ONTO_DATA_DIR: data, ONTO_MIRROR_FROM: PROD },
     stdio: ["ignore", fs.openSync(path.join(data, "server.log"), "a"), fs.openSync(path.join(data, "server.log"), "a")],
   });
   const stop = () => {
@@ -108,11 +114,20 @@ async function start() {
     await new Promise((r) => setTimeout(r, 500));
   }
   const s = await api("POST", "/api/auth/signup", { username: "maplewood-demo", password: crypto.randomUUID() });
-  if (!s.ok) throw new Error(`signup failed: ${JSON.stringify(s.json)}`);
+  if (!s.ok) {
+    server.kill();
+    throw new Error(`signup failed: ${JSON.stringify(s.json)} (another registry already on :${PORT}? \`lsof -ti tcp:${PORT}\`)`);
+  }
   fs.mkdirSync(path.dirname(STATE), { recursive: true });
   fs.writeFileSync(STATE, JSON.stringify({ registry: STAGE, token: s.json.token, data }), { mode: 0o600 });
   console.log(`staging registry ${STAGE} (data ${data})\nmirroring production:`);
-  await mirror(s.json.token);
+  try {
+    await mirror(s.json.token);
+  } catch (e) {
+    server.kill(); // don't leave an orphan registry holding the port
+    fs.rmSync(data, { recursive: true, force: true });
+    throw e;
+  }
   console.log(`\nready. MCP: ${STAGE}/mcp   Ctrl-C resets (deletes the data dir).`);
 }
 
