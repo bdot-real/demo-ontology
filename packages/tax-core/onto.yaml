@@ -1,5 +1,5 @@
 name: "@tax/core"
-version: 1.0.0
+version: 3.0.0
 description: "Core tax concepts for modeling tax rates, authorities, and types."
 license: Apache-2.0
 keywords: ["tax"]
@@ -7,6 +7,6 @@ namespace: https://onto.melx.buzz/ns/tax/core#
 sources: [ontology/*.ttl]
 dependencies:
   "@legal/obligations": "^1"
-  "@legal/acts": "^1"
+  "@legal/acts": "^1.2"
   "@w3c/time": "^1"
   "@legal/jurisdictions": "^1"

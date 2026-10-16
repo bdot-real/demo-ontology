@@ -8,7 +8,7 @@
 <https://onto.melx.buzz/ns/tax/core> a owl:Ontology ;
     rdfs:label "Tax Core" ;
     rdfs:comment "Core tax concepts for modeling tax rates, authorities, and types." ;
-    owl:versionInfo "1.0.0" .
+    owl:versionInfo "3.0.0" .
 
 
 :TaxType a skos:ConceptScheme ;
@@ -165,7 +165,7 @@
     :effectiveFrom "2010-07-01"^^xsd:date ;
     :taxType :HST ;
     :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON> ;
-    :imposedBy <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165_2> ;
     :sourceUrl "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html"^^xsd:anyURI ;
     :verifiedOn "2026-10-16"^^xsd:date ;
     rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
@@ -185,12 +185,13 @@
     :effectiveFrom "2013-04-01"^^xsd:date ;
     :taxType :PST ;
     :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-BC> ;
-    :imposedBy <https://onto.melx.buzz/ns/legal/acts#bc_provincial_sales_tax> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#bc_psta_s105_1> ;
     :sourceUrl "https://www2.gov.bc.ca/gov/content/taxes/tim/pst/parts/pt-4"^^xsd:anyURI ;
     :verifiedOn "2026-10-16"^^xsd:date ;
     rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
 
 :rate-ST-NY a :TaxRate ;
+    rdfs:label "New York State sales tax rate (state rate only; local rates not modelled)" ;
     :rate "0.04"^^xsd:decimal ;
     :effectiveFrom "2005-06-01"^^xsd:date ;
     :taxType :US_SalesTax ;
@@ -198,17 +199,18 @@
     :imposedBy <https://onto.melx.buzz/ns/legal/acts#ny_tax_law_section1105> ;
     :sourceUrl "https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/sales_tax_rates_additional_sales_taxes_and_fees.htm"^^xsd:anyURI ;
     :verifiedOn "2026-10-16"^^xsd:date ;
-    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+    rdfs:comment "State rate only; local rates not modelled. For demonstration, not tax advice. Verified 2026-10-16." .
 
 :rate-ST-WA a :TaxRate ;
+    rdfs:label "Washington State retail sales tax rate (state rate only; local rates not modelled)" ;
     :rate "0.065"^^xsd:decimal ;
-    :effectiveFrom "1983-07-01"^^xsd:date ;
+    :effectiveFrom "1983-03-01"^^xsd:date ;
     :taxType :US_SalesTax ;
     :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#US-WA> ;
     :imposedBy <https://onto.melx.buzz/ns/legal/acts#wa_rcw_82_08_020> ;
     :sourceUrl "https://dor.wa.gov/taxes-rates/retail-sales-tax"^^xsd:anyURI ;
     :verifiedOn "2026-10-16"^^xsd:date ;
-    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+    rdfs:comment "State rate only; local rates not modelled. Three border counties stayed at 5.4% until 1985-01-01 (WA DOR Chart 4). For demonstration, not tax advice. Verified 2026-10-16." .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 <https://onto.melx.buzz/agents/onto-agent> a prov:SoftwareAgent ;
