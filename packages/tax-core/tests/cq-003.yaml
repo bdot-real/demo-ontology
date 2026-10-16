@@ -1,0 +1,13 @@
+id: CQ-003
+question: "Which rates have no effectiveTo, i.e. are currently in force?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?rate
+  WHERE {
+    ?rate a :TaxRate .
+    FILTER NOT EXISTS { ?rate :effectiveTo ?effectiveTo }
+  }
+expect:
+  rows: 6
+  contains: [{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-ST-WA>"},{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-ST-NY>"},{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-PST-BC>"},{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-QST-QC>"},{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-HST-ON>"},{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-GST-CA>"}]

@@ -1,0 +1,18 @@
+id: CQ-004
+question: "Which supplies were made on or after 2024-05-05, and what is their tax type?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT DISTINCT ?supply ?taxType
+  WHERE {
+    ?supply a/rdfs:subClassOf* :Supply ;
+        :supplyDate ?date ;
+        :taxType ?taxType .
+    FILTER (xsd:date(?date) >= "2024-05-05"^^xsd:date)
+  }
+expect:
+  rows: 2
+  contains: [{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply6>","taxType":"<https://onto.melx.buzz/ns/tax/core#US_SalesTax>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply5>","taxType":"<https://onto.melx.buzz/ns/tax/core#US_SalesTax>"}]

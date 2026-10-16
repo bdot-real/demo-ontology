@@ -1,0 +1,17 @@
+id: CQ-003
+question: "Which supplies are made to a given business customer, and is the recipient a registrant?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT DISTINCT ?supply ?registrant
+  WHERE {
+    ?supply a/rdfs:subClassOf* :Supply ;
+        :recipient d:ExampleBusinessCustomer ;
+        :recipientIsRegistrant ?registrant .
+  }
+expect:
+  rows: 6
+  contains: [{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/DigitalSupply1>","registrant":"<true>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply6>","registrant":"<true>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply5>","registrant":"<true>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply4>","registrant":"<true>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply3>","registrant":"<true>"},{"supply":"<https://onto.melx.buzz/ns/tax/indirect/data/MaplewoodSupply1>","registrant":"<true>"}]

@@ -1,0 +1,12 @@
+id: CQ-004
+question: "List all exemption instances."
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?exemption
+  WHERE {
+    ?exemption a :Exemption .
+  }
+expect:
+  rows: 1
+  contains: [{"exemption":"<https://onto.melx.buzz/ns/tax/core/data/ExampleExemption>"}]

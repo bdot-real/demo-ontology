@@ -1,0 +1,75 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <https://onto.melx.buzz/ns/tax/indirect#> .
+@prefix d: <https://onto.melx.buzz/ns/tax/indirect/data/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix juris: <https://onto.melx.buzz/ns/legal/jurisdictions#> .
+@prefix taxcore: <https://onto.melx.buzz/ns/tax/core#> .
+
+# Example data: supplies made by Maplewood (the demo's seller) to fictional customers. Amounts and dates
+# are illustrative.
+
+d:ExampleBusinessCustomer a org:Organization ;
+    rdfs:label "Example business customer (fictional)" .
+
+d:Consumer a org:Organization ;
+    rdfs:label "Example consumer (fictional)" .
+
+d:MaplewoodSupply1 a :Supply ;
+    :amount "1000.00"^^xsd:decimal ;
+    :supplyDate "2024-05-01"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON> ;
+    :recipientIsRegistrant "true"^^xsd:boolean .
+
+d:MaplewoodSupply2 a :Supply ;
+    :amount "500.00"^^xsd:decimal ;
+    :supplyDate "2024-05-02"^^xsd:date ;
+    :recipient d:Consumer ;
+    :recipientIsRegistrant "false"^^xsd:boolean .
+
+d:MaplewoodSupply3 a :Supply, :TaxableSupply ;
+    :amount "200.00"^^xsd:decimal ;
+    :supplyDate "2024-05-03"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    :recipientIsRegistrant "true"^^xsd:boolean ;
+    :taxType <https://onto.melx.buzz/ns/tax/core#QST> .
+
+d:MaplewoodSupply4 a :Supply, :TaxableSupply ;
+    :amount "1500.00"^^xsd:decimal ;
+    :supplyDate "2024-05-04"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    :recipientIsRegistrant "true"^^xsd:boolean .
+
+d:MaplewoodSupply5 a :Supply, :TaxableSupply ;
+    :amount "500001.00"^^xsd:decimal ;
+    :supplyDate "2024-05-05"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#US-NY> ;
+    :recipientIsRegistrant "true"^^xsd:boolean ;
+    :taxType <https://onto.melx.buzz/ns/tax/core#US_SalesTax> .
+
+d:MaplewoodSupply6 a :Supply, :TaxableSupply ;
+    :amount "100001.00"^^xsd:decimal ;
+    :supplyDate "2024-05-06"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#US-WA> ;
+    :recipientIsRegistrant "true"^^xsd:boolean ;
+    :taxType <https://onto.melx.buzz/ns/tax/core#US_SalesTax> .
+
+d:DigitalSupply1 a :DigitalSupply, :TaxableSupply ;
+    :amount "500.00"^^xsd:decimal ;
+    :supplyDate "2024-05-01"^^xsd:date ;
+    :recipient d:ExampleBusinessCustomer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    :recipientIsRegistrant "true"^^xsd:boolean ;
+    :taxType <https://onto.melx.buzz/ns/tax/core#QST> .
+
+d:MaplewoodInputTaxCredit1 a :InputTaxCredit ;
+    :claimedOn d:MaplewoodSupply1 .
+
+d:MaplewoodInputTaxCredit2 a :InputTaxCredit ;
+    :claimedOn d:MaplewoodSupply3 .

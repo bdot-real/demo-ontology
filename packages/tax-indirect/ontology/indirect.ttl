@@ -1,0 +1,254 @@
+@prefix : <https://onto.melx.buzz/ns/tax/indirect#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix taxcore: <https://onto.melx.buzz/ns/tax/core#> .
+@prefix juris: <https://onto.melx.buzz/ns/legal/jurisdictions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://onto.melx.buzz/ns/tax/indirect> a owl:Ontology ;
+    rdfs:label "Tax Indirect" ;
+    rdfs:comment "Ontology for indirect tax concepts including supplies, thresholds, and tax credits." ;
+    owl:versionInfo "1.0.0" .
+
+:Supply a owl:Class ;
+    rdfs:label "Supply" ;
+    rdfs:comment "A supply of goods or services, including digital goods." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :placeOfSupply ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :amount ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :supplyDate ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :recipient ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :taxType ;
+        owl:minCardinality "0"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :recipientIsRegistrant ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:TaxableSupply a owl:Class ;
+    rdfs:subClassOf :Supply ;
+    rdfs:label "Taxable Supply" ;
+    rdfs:comment "A supply that is subject to tax, requiring a place of supply." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :placeOfSupply ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:DigitalSupply a owl:Class ;
+    rdfs:subClassOf :TaxableSupply ;
+    rdfs:label "Digital Supply" ;
+    rdfs:comment "A supply of digital goods or services." .
+
+:InputTaxCredit a owl:Class ;
+    rdfs:label "Input Tax Credit" ;
+    rdfs:comment "A credit for tax paid on inputs used in the business." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :claimedOn ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:Nexus a owl:Class ;
+    rdfs:label "Nexus" ;
+    rdfs:comment "A connection between a supplier and a jurisdiction that obliges the supplier to register for and collect that jurisdiction's tax." .
+
+:ReverseCharge a owl:Class ;
+    rdfs:label "Reverse Charge" ;
+    rdfs:comment "An arrangement under which the recipient of a supply, rather than the supplier, accounts for the tax on it." .
+
+:RegistrationThreshold a owl:Class ;
+    rdfs:label "Registration Threshold" ;
+    rdfs:comment "A threshold that, when crossed, requires tax registration." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :amount ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :currency ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :measurementPeriod ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :appliesTo ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :sourceUrl ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :verifiedOn ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :thresholdJurisdiction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :transactionCount ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] .
+
+:placeOfSupply a owl:ObjectProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range skos:Concept ;
+    rdfs:label "place of supply" ;
+    rdfs:comment "The jurisdiction where the supply was made." .
+
+:amount a owl:DatatypeProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "amount" ;
+    rdfs:comment "The monetary value of the supply." .
+
+:supplyDate a owl:DatatypeProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range xsd:date ;
+    rdfs:label "supply date" ;
+    rdfs:comment "The date on which the supply was made." .
+
+:recipient a owl:ObjectProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range org:Organization ;
+    rdfs:label "recipient" ;
+    rdfs:comment "The organization that received the supply." .
+
+:taxType a owl:ObjectProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range skos:Concept ;
+    rdfs:label "tax type" ;
+    rdfs:comment "The tax type applicable to the supply." .
+
+:recipientIsRegistrant a owl:DatatypeProperty ;
+    rdfs:domain :Supply ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "recipient is registrant" ;
+    rdfs:comment "True when the recipient is a registered business, false for a consumer." .
+
+:claimedOn a owl:ObjectProperty ;
+    rdfs:domain :InputTaxCredit ;
+    rdfs:range :Supply ;
+    rdfs:label "claimed on" ;
+    rdfs:comment "The supply on which the input tax credit is claimed." .
+
+:appliesTo a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:string ;
+    rdfs:label "applies to" ;
+    rdfs:comment "The scope of the registration threshold." .
+
+:currency a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:string ;
+    rdfs:label "currency" ;
+    rdfs:comment "The currency of the threshold amount." .
+
+:measurementPeriod a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:string ;
+    rdfs:label "measurement period" ;
+    rdfs:comment "The time period over which the threshold is measured." .
+
+:sourceUrl a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:anyURI ;
+    rdfs:label "source URL" ;
+    rdfs:comment "The URL of the source for the threshold information." .
+
+:thresholdJurisdiction a owl:ObjectProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range skos:Concept ;
+    rdfs:label "threshold jurisdiction" ;
+    rdfs:comment "The jurisdiction for which this registration threshold applies." .
+
+:transactionCount a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:integer ;
+    rdfs:label "transaction count" ;
+    rdfs:comment "The number of transactions required to trigger the threshold." .
+
+:verifiedOn a owl:DatatypeProperty ;
+    rdfs:domain :RegistrationThreshold ;
+    rdfs:range xsd:date ;
+    rdfs:label "verified on" ;
+    rdfs:comment "The date the threshold information was verified." .
+
+:threshold-small-supplier-CA a :RegistrationThreshold ;
+    rdfs:label "Threshold for small suppliers in Canada" ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." ;
+    :amount "30000"^^xsd:decimal ;
+    :currency "CAD"^^xsd:string ;
+    :measurementPeriod "a single calendar quarter or the last four consecutive calendar quarters"^^xsd:string ;
+    :appliesTo "worldwide taxable supplies, including associates"^^xsd:string ;
+    :sourceUrl <https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4022/general-information-gst-hst-registrants.html> ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    :thresholdJurisdiction juris:CA .
+
+:threshold-specified-QST-QC a :RegistrationThreshold ;
+    rdfs:label "Threshold for specified QST in Quebec" ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." ;
+    :amount "30000"^^xsd:decimal ;
+    :currency "CAD"^^xsd:string ;
+    :measurementPeriod "12 months"^^xsd:string ;
+    :appliesTo "taxable supplies to specified Quebec consumers, by suppliers outside Quebec registered for GST/HST"^^xsd:string ;
+    :sourceUrl <https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/special-cases-gsthst-and-qst/suppliers-outside-quebec/qst-registration-for-suppliers-outside-quebec/registration-under-the-specified-system-suppliers-outside-quebec-who-are-registered-under-the-general-gsthst-system/> ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    :thresholdJurisdiction juris:CA-QC .
+
+:threshold-PST-BC a :RegistrationThreshold ;
+    rdfs:label "Threshold for PST in British Columbia" ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." ;
+    :amount "10000"^^xsd:decimal ;
+    :currency "CAD"^^xsd:string ;
+    :measurementPeriod "preceding 12 months"^^xsd:string ;
+    :appliesTo "gross revenue from retail sales of goods, software and telecommunication services to BC by sellers in Canada outside BC (PSTA s.172.2)"^^xsd:string ;
+    :sourceUrl <https://www2.gov.bc.ca/gov/content/taxes/tim/pst/parts/pt-8> ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    :thresholdJurisdiction juris:CA-BC .
+
+:threshold-ST-NY a :RegistrationThreshold ;
+    rdfs:label "Threshold for sales tax in New York" ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." ;
+    :amount "500000"^^xsd:decimal ;
+    :currency "USD"^^xsd:string ;
+    :transactionCount "100"^^xsd:integer ;
+    :measurementPeriod "immediately preceding four NY sales tax quarters"^^xsd:string ;
+    :appliesTo "sales of tangible personal property, including prewritten software and SaaS; both the amount and the count must be exceeded"^^xsd:string ;
+    :sourceUrl <https://www.tax.ny.gov/pubs_and_bulls/publications/sales/nexus.htm> ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    :thresholdJurisdiction juris:US-NY .
+
+:threshold-ST-WA a :RegistrationThreshold ;
+    rdfs:label "Threshold for sales tax in Washington" ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." ;
+    :amount "100000"^^xsd:decimal ;
+    :currency "USD"^^xsd:string ;
+    :measurementPeriod "current or prior calendar year"^^xsd:string ;
+    :appliesTo "gross income sourced to Washington"^^xsd:string ;
+    :sourceUrl <https://dor.wa.gov/taxes-rates/retail-sales-tax/marketplace-fairness-leveling-playing-field/remote-sellers> ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    :thresholdJurisdiction juris:US-WA .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+<https://onto.melx.buzz/agents/onto-agent> a prov:SoftwareAgent ;
+  rdfs:label "onto agent" .
+<https://onto.melx.buzz/agents/onto-agent/runs/20261016060232> a prov:Activity ;
+  rdfs:label "onto agent run with qwen3:30b-a3b" ;
+  prov:wasAssociatedWith <https://onto.melx.buzz/agents/onto-agent> ;
+  prov:startedAtTime "2026-10-16T06:02:32.174Z"^^xsd:dateTime .
+<https://onto.melx.buzz/ns/tax/indirect> prov:wasAttributedTo <https://onto.melx.buzz/agents/onto-agent> ;
+  prov:wasGeneratedBy <https://onto.melx.buzz/agents/onto-agent/runs/20261016060232> .

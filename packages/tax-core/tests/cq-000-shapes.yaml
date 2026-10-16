@@ -1,0 +1,5 @@
+id: CQ-000
+question: Does the example data conform to the ontology's constraints (domains, ranges, cardinalities)?
+fixtures: [fixtures/examples.ttl]
+expect:
+  validates: true

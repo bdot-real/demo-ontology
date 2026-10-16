@@ -1,0 +1,12 @@
+id: CQ-005
+question: "List all zero rating instances."
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?zeroRating
+  WHERE {
+    ?zeroRating a :ZeroRating .
+  }
+expect:
+  rows: 1
+  contains: [{"zeroRating":"<https://onto.melx.buzz/ns/tax/core/data/ExampleZeroRating>"}]

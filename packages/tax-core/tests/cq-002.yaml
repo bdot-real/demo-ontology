@@ -1,0 +1,12 @@
+id: CQ-002
+question: "Which provision imposes the GST rate effective from 2008-01-01?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?provision
+  WHERE {
+    :rate-GST-CA :imposedBy ?provision .
+  }
+expect:
+  rows: 1
+  contains: [{"provision":"<https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165>"}]

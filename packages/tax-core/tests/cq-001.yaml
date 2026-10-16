@@ -1,0 +1,17 @@
+id: CQ-001
+question: "Which rate applied to GST in Canada on 2010-01-01?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?rate
+  WHERE {
+    ?rate a :TaxRate ;
+           :taxType :GST ;
+           :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA> ;
+           :effectiveFrom ?effectiveFrom .
+    FILTER (?effectiveFrom <= "2010-01-01"^^xsd:date)
+  }
+expect:
+  rows: 1
+  contains: [{"rate":"<https://onto.melx.buzz/ns/tax/core#rate-GST-CA>"}]

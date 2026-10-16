@@ -1,0 +1,221 @@
+@prefix : <https://onto.melx.buzz/ns/tax/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://onto.melx.buzz/ns/tax/core> a owl:Ontology ;
+    rdfs:label "Tax Core" ;
+    rdfs:comment "Core tax concepts for modeling tax rates, authorities, and types." ;
+    owl:versionInfo "1.0.0" .
+
+
+:TaxType a skos:ConceptScheme ;
+    skos:prefLabel "Tax Type" ;
+    skos:definition "A scheme of tax types for which rates are defined." .
+
+:GST a skos:Concept ;
+    skos:inScheme :TaxType ;
+    skos:prefLabel "GST" ;
+    skos:definition "Goods and Services Tax." .
+
+:HST a skos:Concept ;
+    skos:inScheme :TaxType ;
+    skos:prefLabel "HST" ;
+    skos:definition "Harmonized Sales Tax." .
+
+:QST a skos:Concept ;
+    skos:inScheme :TaxType ;
+    skos:prefLabel "QST" ;
+    skos:definition "Quebec Sales Tax." .
+
+:PST a skos:Concept ;
+    skos:inScheme :TaxType ;
+    skos:prefLabel "PST" ;
+    skos:definition "Provincial Sales Tax." .
+
+:US_SalesTax a skos:Concept ;
+    skos:inScheme :TaxType ;
+    skos:prefLabel "US-SalesTax" ;
+    skos:definition "United States Sales Tax." .
+
+:TaxAuthority a owl:Class ;
+    rdfs:label "Tax Authority" ;
+    rdfs:comment "An authority that administers tax collection and enforcement." .
+
+:Registrant a owl:Class ;
+    rdfs:label "Registrant" ;
+    rdfs:comment "A legal entity that is registered with a tax authority." .
+
+:RegistrationNumber a owl:Class ;
+    rdfs:label "Registration Number" ;
+    rdfs:comment "A unique identifier assigned to a registrant by a tax authority." .
+
+:Exemption a owl:Class ;
+    rdfs:label "Exemption" ;
+    rdfs:comment "A condition under which a tax is not applied to a transaction or entity." .
+
+:ZeroRating a owl:Class ;
+    rdfs:label "Zero Rating" ;
+    rdfs:comment "A tax rate of zero applied to a specific transaction or category." .
+
+:rate a owl:DatatypeProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "Rate" ;
+    rdfs:comment "The tax rate as a decimal value (e.g., 0.05 for 5%)." .
+
+:effectiveFrom a owl:DatatypeProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range xsd:date ;
+    rdfs:label "Effective From" ;
+    rdfs:comment "The date from which the tax rate becomes effective." .
+
+:effectiveTo a owl:DatatypeProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range xsd:date ;
+    rdfs:label "Effective To" ;
+    rdfs:comment "The date until which the tax rate is effective (if any)." .
+
+:taxType a owl:ObjectProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range skos:Concept ;
+    rdfs:label "Tax Type" ;
+    rdfs:comment "The tax type (e.g., GST, HST) for which the rate applies." .
+
+:jurisdiction a owl:ObjectProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range skos:Concept ;
+    rdfs:label "Jurisdiction" ;
+    rdfs:comment "The jurisdiction for which the tax rate applies." .
+
+:imposedBy a owl:ObjectProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range <https://onto.melx.buzz/ns/legal/acts#Provision> ;
+    rdfs:label "Imposed By" ;
+    rdfs:comment "The legal provision that imposes the tax rate." .
+
+:sourceUrl a owl:DatatypeProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range xsd:anyURI ;
+    rdfs:label "Source URL" ;
+    rdfs:comment "The URL of the source from which the rate was verified." .
+
+:verifiedOn a owl:DatatypeProperty ;
+    rdfs:domain :TaxRate ;
+    rdfs:range xsd:date ;
+    rdfs:label "Verified On" ;
+    rdfs:comment "The date on which the rate was verified." .
+
+:TaxRate a owl:Class ;
+    rdfs:label "Tax Rate" ;
+    rdfs:comment "A tax rate with an effective period, applicable to a specific tax type and jurisdiction." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :rate ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :effectiveFrom ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :effectiveTo ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :taxType ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :jurisdiction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:subClassOf [ a owl:Restriction ;
+        owl:onProperty :imposedBy ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+:CRA a :TaxAuthority ;
+    rdfs:label "CRA" ;
+    rdfs:comment "Canada Revenue Agency, the federal tax authority for Canada." .
+
+:RevenuQuebec a :TaxAuthority ;
+    rdfs:label "Revenu Québec" ;
+    rdfs:comment "The tax authority for Quebec provincial taxes." .
+
+:BCMinistryOfFinance a :TaxAuthority ;
+    rdfs:label "BC Ministry of Finance" ;
+    rdfs:comment "The ministry responsible for tax collection in British Columbia." .
+
+:NYDTF a :TaxAuthority ;
+    rdfs:label "NY DTF" ;
+    rdfs:comment "New York Department of Taxation and Finance." .
+
+:WADOR a :TaxAuthority ;
+    rdfs:label "WA DOR" ;
+    rdfs:comment "Washington Department of Revenue." .
+
+:rate-GST-CA a :TaxRate ;
+    :rate "0.05"^^xsd:decimal ;
+    :effectiveFrom "2008-01-01"^^xsd:date ;
+    :taxType :GST ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165> ;
+    :sourceUrl "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-HST-ON a :TaxRate ;
+    :rate "0.13"^^xsd:decimal ;
+    :effectiveFrom "2010-07-01"^^xsd:date ;
+    :taxType :HST ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#excise_tax_act_s165> ;
+    :sourceUrl "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-QST-QC a :TaxRate ;
+    :rate "0.09975"^^xsd:decimal ;
+    :effectiveFrom "2013-01-01"^^xsd:date ;
+    :taxType :QST ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-QC> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#quebec_sales_tax_s16> ;
+    :sourceUrl "https://www.revenuquebec.ca/en/businesses/consumption-taxes/gsthst-and-qst/collecting-gst-and-qst/calculating-the-taxes/"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-PST-BC a :TaxRate ;
+    :rate "0.07"^^xsd:decimal ;
+    :effectiveFrom "2013-04-01"^^xsd:date ;
+    :taxType :PST ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#CA-BC> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#bc_provincial_sales_tax> ;
+    :sourceUrl "https://www2.gov.bc.ca/gov/content/taxes/tim/pst/parts/pt-4"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-ST-NY a :TaxRate ;
+    :rate "0.04"^^xsd:decimal ;
+    :effectiveFrom "2005-06-01"^^xsd:date ;
+    :taxType :US_SalesTax ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#US-NY> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#ny_tax_law_section1105> ;
+    :sourceUrl "https://www.tax.ny.gov/pubs_and_bulls/tg_bulletins/st/sales_tax_rates_additional_sales_taxes_and_fees.htm"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+:rate-ST-WA a :TaxRate ;
+    :rate "0.065"^^xsd:decimal ;
+    :effectiveFrom "1983-07-01"^^xsd:date ;
+    :taxType :US_SalesTax ;
+    :jurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#US-WA> ;
+    :imposedBy <https://onto.melx.buzz/ns/legal/acts#wa_rcw_82_08_020> ;
+    :sourceUrl "https://dor.wa.gov/taxes-rates/retail-sales-tax"^^xsd:anyURI ;
+    :verifiedOn "2026-10-16"^^xsd:date ;
+    rdfs:comment "For demonstration, not tax advice. Verified 2026-10-16." .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+<https://onto.melx.buzz/agents/onto-agent> a prov:SoftwareAgent ;
+  rdfs:label "onto agent" .
+<https://onto.melx.buzz/agents/onto-agent/runs/20261016042914> a prov:Activity ;
+  rdfs:label "onto agent run with qwen3:30b-a3b" ;
+  prov:wasAssociatedWith <https://onto.melx.buzz/agents/onto-agent> ;
+  prov:startedAtTime "2026-10-16T04:29:14.071Z"^^xsd:dateTime .
+<https://onto.melx.buzz/ns/tax/core> prov:wasAttributedTo <https://onto.melx.buzz/agents/onto-agent> ;
+  prov:wasGeneratedBy <https://onto.melx.buzz/agents/onto-agent/runs/20261016042914> .

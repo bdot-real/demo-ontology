@@ -1,0 +1,15 @@
+id: CQ-008
+question: "Which registration thresholds are for a currency of USD?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?threshold
+  WHERE {
+    ?threshold a :RegistrationThreshold ;
+        :currency "USD"^^xsd:string .
+  }
+expect:
+  rows: 2
+  contains: [{"threshold":"<https://onto.melx.buzz/ns/tax/indirect#threshold-ST-WA>"},{"threshold":"<https://onto.melx.buzz/ns/tax/indirect#threshold-ST-NY>"}]

@@ -1,0 +1,21 @@
+id: CQ-006
+question: "What are the details of the registration threshold for New York?"
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/indirect#>
+  PREFIX d: <https://onto.melx.buzz/ns/tax/indirect/data/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?appliesTo ?sourceUrl ?verifiedOn ?transactionCount ?currency ?measurementPeriod
+  WHERE {
+    ?threshold a :RegistrationThreshold ;
+        :thresholdJurisdiction <https://onto.melx.buzz/ns/legal/jurisdictions#US-NY> ;
+        :appliesTo ?appliesTo ;
+        :sourceUrl ?sourceUrl ;
+        :verifiedOn ?verifiedOn ;
+        :transactionCount ?transactionCount ;
+        :currency ?currency ;
+        :measurementPeriod ?measurementPeriod .
+  }
+expect:
+  rows: 1
+  contains: [{"appliesTo":"<sales of tangible personal property, including prewritten software and SaaS; both the amount and the count must be exceeded>","sourceUrl":"<https://www.tax.ny.gov/pubs_and_bulls/publications/sales/nexus.htm>","verifiedOn":"<2026-10-16>","transactionCount":"<100>","currency":"<USD>","measurementPeriod":"<immediately preceding four NY sales tax quarters>"}]

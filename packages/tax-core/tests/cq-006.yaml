@@ -1,0 +1,12 @@
+id: CQ-006
+question: "List all tax authorities."
+fixtures: [fixtures/examples.ttl]
+query: |
+  PREFIX : <https://onto.melx.buzz/ns/tax/core#>
+  SELECT ?authority
+  WHERE {
+    ?authority a :TaxAuthority .
+  }
+expect:
+  rows: 5
+  contains: [{"authority":"<https://onto.melx.buzz/ns/tax/core#WADOR>"},{"authority":"<https://onto.melx.buzz/ns/tax/core#NYDTF>"},{"authority":"<https://onto.melx.buzz/ns/tax/core#BCMinistryOfFinance>"},{"authority":"<https://onto.melx.buzz/ns/tax/core#RevenuQuebec>"},{"authority":"<https://onto.melx.buzz/ns/tax/core#CRA>"}]
