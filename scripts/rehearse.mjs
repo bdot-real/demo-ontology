@@ -49,6 +49,8 @@ for (let i = 0; ; i++) {
   if (i > 300 || stage.exitCode !== null) throw new Error("staging did not start; see stage.log");
   await new Promise((r) => setTimeout(r, 1000));
 }
+const refused = fs.readFileSync(path.join(OUT, "stage.log"), "utf8").split("\n").filter((l) => /^\s+! /.test(l));
+check("staging", refused.length === 0, `staging mirrors every production version${refused.length ? `; refused: ${refused.map((l) => l.trim().split(/\s+/)[1]).join(", ")}` : ""}`);
 const beatsStep = (n) => spawnSync(path.join(root, "scripts/beats.sh"), [String(n)], { encoding: "utf8" });
 
 // --- agent -------------------------------------------------------------------------------------------
@@ -115,7 +117,7 @@ check("beat-6", s.status === 0, "staging accepted @tax/indirect 2.0.0 as major")
 
 // Beat 6
 const b6 = agent("beat-6", prompts[6]);
-check("beat-6", /not affected|aren't affected|are not affected|no,? we/i.test(b6.text) && /1\.0\.\d/.test(b6.text), "not affected today; stays on @tax/indirect 1.0.x");
+check("beat-6", /not affected|aren't affected|are not affected|\bno\b[,.]? we|today:?\W{0,4}no\b/i.test(b6.text) && /1\.0\.\d/.test(b6.text), "not affected today; stays on @tax/indirect 1.0.x");
 check("beat-6", /creditedSupply/.test(b6.text) && /placeOfSupply/.test(b6.text), "explains the migration (placeOfSupply, creditedSupply)");
 const b6b = agent("beat-6-rerun", BEAT6_RERUN, true);
 checkPosition("beat-6-rerun", b6b.text);
