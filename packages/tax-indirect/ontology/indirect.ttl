@@ -11,14 +11,14 @@
 <https://onto.melx.buzz/ns/tax/indirect> a owl:Ontology ;
     rdfs:label "Tax Indirect" ;
     rdfs:comment "Ontology for indirect tax concepts including supplies, thresholds, and tax credits." ;
-    owl:versionInfo "1.0.1" .
+    owl:versionInfo "2.0.0" .
 
 :Supply a owl:Class ;
     rdfs:label "Supply" ;
     rdfs:comment "A supply of goods or services, including digital goods." ;
     rdfs:subClassOf [ a owl:Restriction ;
         owl:onProperty :placeOfSupply ;
-        owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ] ;
     rdfs:subClassOf [ a owl:Restriction ;
         owl:onProperty :amount ;
         owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -57,7 +57,6 @@
     rdfs:comment "A credit for tax paid on inputs used in the business." ;
     rdfs:subClassOf [ a owl:Restriction ;
         owl:onProperty :claimedOn ;
-        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
         owl:maxCardinality "1"^^xsd:nonNegativeInteger ] .
 
 :Nexus a owl:Class ;
@@ -143,7 +142,15 @@
     rdfs:domain :InputTaxCredit ;
     rdfs:range :Supply ;
     rdfs:label "claimed on" ;
-    rdfs:comment "The supply on which the input tax credit is claimed." .
+    rdfs:comment "The supply on which the input tax credit is claimed." ;
+    owl:deprecated true ;
+    <http://purl.org/dc/terms/isReplacedBy> :creditedSupply .
+
+:creditedSupply a owl:ObjectProperty ;
+    rdfs:domain :InputTaxCredit ;
+    rdfs:range :TaxableSupply ;
+    rdfs:label "credited supply" ;
+    rdfs:comment "The taxable supply on which the input tax credit is claimed; replaces claimedOn." .
 
 :appliesTo a owl:DatatypeProperty ;
     rdfs:domain :RegistrationThreshold ;
