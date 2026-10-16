@@ -83,7 +83,7 @@ const rate = (id, j, t, r, from, provision) => ({
 });
 const rates = [
   rate("GST-CA", "CA", "GST", 0.05, "2008-01-01", "excise_tax_act_s165"),
-  rate("HST-ON", "CA-ON", "HST", 0.13, "2010-07-01", "excise_tax_act_s165"),
+  rate("HST-ON", "CA-ON", "HST", 0.13, "2010-07-01", "excise_tax_act_s165_2"),
   rate("QST-QC", "CA-QC", "QST", 0.09975, "2013-01-01", "quebec_sales_tax_s16"),
   rate("PST-BC", "CA-BC", "PST", 0.07, "2013-04-01", "bc_provincial_sales_tax"),
   rate("ST-NY", "US-NY", "US_SalesTax", 0.04, "2005-06-01", "ny_tax_law_section1105"),
