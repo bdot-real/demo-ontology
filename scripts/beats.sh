@@ -6,8 +6,8 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 steps=(
-  "tax-core-1.1.0:ok"
-  "tax-core-1.1.1:ok"
+  "tax-core-3.1.0:ok"
+  "tax-core-3.1.1:ok"
   "tax-indirect-1.1.0-bad:reject"
   "tax-indirect-2.0.0:ok"
 )

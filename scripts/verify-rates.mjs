@@ -74,10 +74,13 @@ const VERIFIED = {
 };
 
 // Reported, not failed. Remove an entry once the fix is published.
+// Older production versions are immutable, so their errata stay known; the agent pins the fixed major.
 const KNOWN = {
-  "rate-ST-WA effectiveFrom": "DOR Chart 4: 6.5% effective 1983-03-01 (border counties 1985-01-01), not 1983-07-01. Reported to the ontology agent (#14).",
-  "rate-PST-BC citation": "Cites the whole Act; 7% on software is PSTA s.105(1). Reported to the ontology agent (#14).",
-  "rate-HST-ON@1.0.0 citation": "Fixed to ETA s.165(2) in @tax/core 2.0.0 (#23); 1.x keeps s.165(1).",
+  "rate-HST-ON@1 citation": "Fixed to ETA s.165(2) in @tax/core 2.0.0 (#23).",
+  "rate-ST-WA@1 effectiveFrom": "Fixed to 1983-03-01 in @tax/core 3.0.0 (#14).",
+  "rate-ST-WA@2 effectiveFrom": "Fixed to 1983-03-01 in @tax/core 3.0.0 (#14).",
+  "rate-PST-BC@1 citation": "Fixed to PSTA s.105(1) in @tax/core 3.0.0 (#14).",
+  "rate-PST-BC@2 citation": "Fixed to PSTA s.105(1) in @tax/core 3.0.0 (#14).",
 };
 
 let failures = 0;
@@ -155,10 +158,10 @@ for (const v of versions) {
       report(false, "", `${id}: no verified evidence on file; add it to VERIFIED`);
       continue;
     }
-    report(r.rate === exp.rate, `${id} rate`, `${id} rate ${r.rate}${r.rate === exp.rate ? "" : ` (verified ${exp.rate})`}`);
-    report(r.effectiveFrom === exp.effectiveFrom, `${id} effectiveFrom`, `${id} effectiveFrom ${r.effectiveFrom}${r.effectiveFrom === exp.effectiveFrom ? "" : ` (verified ${exp.effectiveFrom})`}`);
+    report(r.rate === exp.rate, `${id}@${v.split(".")[0]} rate`, `${id} rate ${r.rate}${r.rate === exp.rate ? "" : ` (verified ${exp.rate})`}`);
+    report(r.effectiveFrom === exp.effectiveFrom, `${id}@${v.split(".")[0]} effectiveFrom`, `${id} effectiveFrom ${r.effectiveFrom}${r.effectiveFrom === exp.effectiveFrom ? "" : ` (verified ${exp.effectiveFrom})`}`);
     const cite = await citation(r.imposedBy);
-    const key = v.startsWith("1.") && id === "rate-HST-ON" ? `${id}@1.0.0 citation` : `${id} citation`;
+    const key = `${id}@${v.split(".")[0]} citation`;
     report(cite === exp.citation, key, `${id} imposedBy ${r.imposedBy.replace(ACTS, "")} → "${cite}"${cite === exp.citation ? "" : ` (should be "${exp.citation}")`}`);
   }
   for (const id of Object.keys(VERIFIED)) if (!byVersion[v][id]) report(false, "", `${id} missing from @tax/core ${v}`);

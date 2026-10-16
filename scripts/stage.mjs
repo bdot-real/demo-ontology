@@ -25,7 +25,7 @@ const STATE = path.join(here, "../.staging/state.json");
 // Roots the demo needs; their dependencies are mirrored too. Packages not yet on production are skipped.
 const ROOTS = process.env.STAGE_ROOTS?.split(",") ?? ["@tax/filing", "@tax/indirect", "@tax/core", "@legal/obligations", "@legal/acts", "@legal/processes", "@legal/jurisdictions"];
 // Scripted demo versions: allowed on staging only.
-const SCRIPTED = new Set(["@tax/core@1.1.0", "@tax/core@1.1.1", "@tax/indirect@1.1.0", "@tax/indirect@2.0.0"]);
+const SCRIPTED = new Set(["@tax/core@1.1.0", "@tax/core@1.1.1", "@tax/core@3.1.0", "@tax/core@3.1.1", "@tax/indirect@1.1.0", "@tax/indirect@2.0.0"]);
 
 async function get(url) {
   const r = await fetch(url);

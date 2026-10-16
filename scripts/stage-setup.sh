@@ -4,7 +4,7 @@
 #
 #   scripts/stage-setup.sh [commit]     # default: the commit production serves (deploy/deploy.sh)
 set -euo pipefail
-COMMIT=${1:-2f335c0}
+COMMIT=${1:-88bb23c}
 SRC=${ONTO_SRC:-$(cd "$(dirname "$0")/../../ontology" && pwd)}
 DEST="$(cd "$(dirname "$0")/.." && pwd)/.staging/registry"
 [ -d "$DEST/.git" ] || git clone -q --no-checkout "$SRC" "$DEST"

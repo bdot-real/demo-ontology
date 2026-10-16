@@ -26,7 +26,7 @@ const RULES = [
   ["CA-QC", "GST", 0.05, "ETA s.165(1) (excise_tax_act_s165)", "CRA", "GST-HST-2026-10"],
   ["CA-QC", "QST", 0.09975, "Act respecting the Québec sales tax s.16 (quebec_sales_tax_s16)", "Revenu Québec", "QST-2026-Q4"],
   ["CA-BC", "GST", 0.05, "ETA s.165(1) (excise_tax_act_s165)", "CRA", "GST-HST-2026-10"],
-  ["CA-BC", "PST", 0.07, "Provincial Sales Tax Act (BC) (bc_provincial_sales_tax)", "BC Ministry of Finance", "PST-2026-10"],
+  ["CA-BC", "PST", 0.07, "PSTA s.105(1) (bc_psta_s105_1)", "BC Ministry of Finance", "PST-2026-10"],
   ["US-NY", "US_SalesTax", 0.04, "NY Tax Law §1105 (ny_tax_law_section1105)", "NY DTF", "ST-NY-2026-SEP-NOV"],
   ["US-WA", "US_SalesTax", 0.065, "RCW 82.08.020 (wa_rcw_82_08_020)", "WA DOR", "ST-WA-2026-10"],
 ];
