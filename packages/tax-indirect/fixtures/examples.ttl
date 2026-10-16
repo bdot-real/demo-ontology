@@ -27,6 +27,7 @@ d:MaplewoodSupply2 a :Supply ;
     :amount "500.00"^^xsd:decimal ;
     :supplyDate "2024-05-02"^^xsd:date ;
     :recipient d:Consumer ;
+    :placeOfSupply <https://onto.melx.buzz/ns/legal/jurisdictions#CA-ON> ;
     :recipientIsRegistrant "false"^^xsd:boolean .
 
 d:MaplewoodSupply3 a :Supply, :TaxableSupply ;
@@ -72,4 +73,4 @@ d:MaplewoodInputTaxCredit1 a :InputTaxCredit ;
     :claimedOn d:MaplewoodSupply1 .
 
 d:MaplewoodInputTaxCredit2 a :InputTaxCredit ;
-    :claimedOn d:MaplewoodSupply3 .
+    :creditedSupply d:MaplewoodSupply3 .

@@ -1,5 +1,5 @@
 name: "@tax/indirect"
-version: 1.0.1
+version: 2.0.0
 description: "Ontology for indirect tax concepts including supplies, thresholds, and tax credits."
 license: Apache-2.0
 keywords: ["tax"]

@@ -9,7 +9,7 @@ query: |
   SELECT DISTINCT ?credit
   WHERE {
     ?credit a :InputTaxCredit ;
-            :claimedOn ?supply .
+            :creditedSupply ?supply .
     ?supply a/rdfs:subClassOf* :TaxableSupply .
   }
 expect:
