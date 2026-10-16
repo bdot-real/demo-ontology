@@ -18,10 +18,14 @@ import { fileURLToPath } from "node:url";
 import xterm from "@xterm/headless";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const take = process.argv[2] ?? "take3";
+const take = process.argv[2] ?? "take4";
 const CLIPS = path.join(root, ".recording/clips", take);
+// The site tour (recording/site.mjs) can come from its own take.
+const siteTake = process.argv[3] ?? take;
+const SITE_CLIP = path.join(root, ".recording/clips", siteTake, "site.mp4");
+const SITE_MARKS = JSON.parse(fs.readFileSync(path.join(root, ".recording/raw", siteTake, "site.json"), "utf8"));
 const PROJECT = path.join(root, ".recording", `maplewood-${take}.fcproj`);
-const OUT = path.join(root, ".recording", "maplewood-beats-4-6.mp4");
+const OUT = path.join(root, ".recording", "maplewood-onto-demo.mp4");
 const FILMCRAFT = process.env.FILMCRAFT_CLI ?? "/Volumes/T7/Projects/filmcraft/target/release/filmcraft-cli";
 const TPS = 254016000000; // FilmCraft ticks per second
 const ticks = (s) => Math.round(s * TPS);
@@ -85,8 +89,9 @@ async function castMarks(name) {
 
 // --- Build ----------------------------------------------------------------------------------------------
 const seq = await cmd("file.newSequence", { name: "Maplewood: beats 4-6", width: 1920, height: 1080, fps: 30, video: 3, audio: 1 });
-const names = fs.readdirSync(CLIPS).filter((f) => f.endsWith(".mp4")).sort();
-const imported = await cmd("file.import", { paths: names.map((f) => path.join(CLIPS, f)) });
+const names = fs.readdirSync(CLIPS).filter((f) => f.endsWith(".mp4") && f !== "site.mp4").sort();
+const imported = await cmd("file.import", { paths: [...names.map((f) => path.join(CLIPS, f)), SITE_CLIP] });
+names.push("site.mp4");
 const item = Object.fromEntries(names.map((f, i) => [f.replace(/\.mp4$/, ""), imported.items[i]]));
 
 const project = JSON.parse((await rpc("tools/call", { name: "project_inspect", arguments: {} })).content[0].text);
@@ -165,19 +170,36 @@ async function agentShot(name, asks) {
   return last;
 }
 
+let b, s;
+
 // 0:00 Opening card
 await card(
   [
     ["Maplewood Compliance Agent", 84, "#ffffff", "Bold"],
-    ["Beats 4–6: the law changes · the model changes · nobody broke", 40, "#c9c3ff"],
+    ["The onto registry, then beats 4–6: the law changes · the model changes · nobody broke", 36, "#c9c3ff"],
     ["Fictional company · real rates verified 2026-10-16 · For demonstration, not tax advice", 30, "#a7a3b8"],
   ],
   6,
 );
 
+// The registry, quickly: what it is, how agents connect, search, a package, a term, a diff.
+b = at;
+s = await put("site", 0, 99);
+{
+  const m = SITE_MARKS;
+  const span = (from, to) => [s.start + from, to - from];
+  await caption("onto: a package registry for OWL and SKOS ontologies. Every publish gets a semantic diff", ...span(0, m.mcp));
+  await caption("Agents connect to one read-only MCP endpoint: search, describe, diff, JSON Schema", ...span(m.mcp, m.search));
+  await caption("Search reaches into values: \"s.165\" finds the HST provision by its citation", ...span(m.search, m.package));
+  await caption("A package: enforced SemVer, competency tests, term coverage, and what it connects to", ...span(m.package, m.term));
+  await caption("Every term is content-hashed, with its history across versions", ...span(m.term, m.diff));
+  await caption("And every version change is classified: breaking, deprecating, additive", ...span(m.diff, s.len));
+}
+await title("The registry", b, at - b);
+
 // Beat 4: the law changes
-let b = at;
-let s = await put("b4-publish", 0, 99);
+b = at;
+s = await put("b4-publish", 0, 99);
 await enlarge(s.clip);
 await caption("A data steward publishes @tax/core 3.1.0 to the staging registry: a hypothetical 2027 QST rate", s.start, s.len);
 s = await put("b4-diff", 0, 99);
@@ -226,7 +248,7 @@ await card(
 );
 
 console.log(`timeline: ${at.toFixed(1)} s`);
-if (at > 180) throw new Error(`cut is ${at.toFixed(1)} s; the brief asks for 3 minutes`);
+if (at > 240) throw new Error(`cut is ${at.toFixed(1)} s; the limit is 4 minutes`);
 await cmd("file.saveAs", { path: PROJECT });
 const ex = await cmd("file.exportMedia", { path: OUT, format: "h264", width: 1920, height: 1080, fps: 30, burnCaptions: true, audio: false, crf: 18, bitrateMode: "crf", wait: true });
 console.log(JSON.stringify(ex).slice(0, 300));
